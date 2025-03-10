@@ -1,18 +1,33 @@
 package com.Tasheen.fullstack_backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "users") // Explicitly specify table name
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Specify primary key strategy
     private Long id;
+
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
+
+    public User() {
+        // Default constructor
+    }
+
+    public User(String username, String name, String email) {
+        this.username = username;
+        this.name = name;
+        this.email = email;
+    }
 
     public Long getId() {
         return id;
